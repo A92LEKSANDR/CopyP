@@ -18,8 +18,26 @@ std::string getCurrentPath(){
 }
 
 void copyToClipBoard(const std::string& text){
-    std::string system_command = "echo -n \"" + text + "\" | wl-copy";
-    system(system_command.c_str());  // Выполнение команды для копирования в буфер обмена
+    const char* waylandSession = getenv("WAYLAND_DISPLAY");
+    const char* x11Session = getenv("DISPLAY");
+
+    std::string command;
+    
+    if (waylandSession) {
+        // Если используется Wayland
+        command = "echo -n \"" + text + "\" | wl-copy";
+    } else if (x11Session) {
+        // Если используется X11
+        command = "echo -n \"" + text + "\" | xclip -selection clipboard";
+    } else {
+        std::cerr << "Неизвестное окружение. Не удалось определить Wayland или X11.\n";
+        return;
+    }
+    // Выполняем команду для копирования в буфер обмена
+    int result = system(command.c_str());
+    if (result != 0) {
+        std::cerr << "Ошибка при копировании в буфер обмена\n";
+    }
 }
 
 int main() {
