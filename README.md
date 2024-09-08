@@ -14,17 +14,34 @@
 
 ## Установка и использование
 
-1. Клонируйте репозиторий:
-   ```bash
-   git clone git@github.com:A92LEKSANDR/cpwd.git
-   ```
-2. Соберите и установите:
-   ```bash
-    cd cpwd
-    make
-    sudo make install
-   ```
+1. Установить необходимые пакеты:                                                    
+    Для X11:                                                                                         
+    ```bash                                                                                          
+     sudo pacman -S xclip    # Arch Linux                                                               
+     sudo apt install xclip  # Ubuntu/Debian                                                          
+     sudo dnf install xclip  # Fedora                                                                 
+     ``` 
+    Для Wayland:
+    ```bash
+    sudo pacman -S wl-clipboard    # Arch Linux
+    sudo apt install wl-clipboard  # Ubuntu/Debian
+    sudo dnf install wl-clipboard  # Fedora
+    ```
+2. Шаги для пользователя:
+
+    Скачайте бинарный файл cpwd и установочный скрипт install.sh в одну и ту же директорию.
+    ```bash
+    git@github.com:A92LEKSANDR/cpwd.git
+    ```
+    Дайте права на выполнение скрипта:
+    ```bash
+    chmod +x install.sh
+    ```
+    Запустите скрипт:
+    ```bash
+    ./install.sh
+    ```
 3. Использование: 
    
-Просто введите команду `cpwd`и текущий путь будет скопирован в буфер обмена
+Просто введите команду в терминале `cpwd` и текущий путь будет скопирован в буфер обмена
 
